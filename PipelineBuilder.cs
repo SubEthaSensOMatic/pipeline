@@ -68,13 +68,12 @@ namespace Pipeline
         {
             lock (_builderLock)
             {
-                // All next() statements called ?
-                bool pipelineEndReached = false;
+                var pipelineState = new PipelineState(_itemFactories.Count);
 
                 // Last item
                 Func<T_PipelineContext, Task> nextItem = _ =>
                 {
-                    pipelineEndReached = true;
+                    pipelineState.setEndReached();
 
                     return Task.CompletedTask;
                 };
@@ -83,32 +82,34 @@ namespace Pipeline
                 {
                     // Create item 
                     var item = _itemFactories[i]();
-
                     var next = nextItem;
+                    var itemIndex = i;
 
                     nextItem = ctx =>
                     {
-                        // next() statement called only once?
-                        var nextCalled = false;
-
                         return item.run(ctx, async () =>
                         {
-                            if (nextCalled)
+                            // next() statement called only once?
+                            if (pipelineState.getNextCalled(itemIndex))
                                 throw new InvalidOperationException("next() statement executed multiple times!");
 
                             await next(ctx);
 
-                            nextCalled = true;
+                            pipelineState.setNextCalled(itemIndex);
                         });
                     };
                 }
 
+                // Return pipeline entry point
                 return async ctx =>
                 {
                     await nextItem(ctx);
 
-                    if (!pipelineEndReached)
+                    if (!pipelineState.EndReached)
                         throw new InvalidOperationException("Pipeline end not reached. All next() statements must be executed!");
+
+                    // Reset state for next Pipeline run
+                    pipelineState.reset();
                 };
             }
         }

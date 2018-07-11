@@ -55,5 +55,9 @@ Configure and run your pipeline ...
   var myContext = new MyPipelineContext();
   await pipeline(myContext);
   
+  // ... run again with new context
+  myContext = new MyPipelineContext();
+  await pipeline(myContext);
+  
   ...
 ```
