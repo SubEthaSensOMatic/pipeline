@@ -10,6 +10,7 @@
     <PackageProjectUrl>https://github.com/SubEthaSensOMatic/pipeline</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/SubEthaSensOMatic/pipeline/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags></PackageTags>
+    <PackageId>AsyncPipeline</PackageId>
   </PropertyGroup>
 
 </Project>
