@@ -5,6 +5,11 @@
     <Description>Asynchronous ASP.NET Core like pipeline implementation</Description>
     <Authors>Ajid Welzel</Authors>
     <Title>Asynchronous Pipeline </Title>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Copyright 2018</Copyright>
+    <PackageProjectUrl>https://github.com/SubEthaSensOMatic/pipeline</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/SubEthaSensOMatic/pipeline/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags></PackageTags>
   </PropertyGroup>
 
 </Project>

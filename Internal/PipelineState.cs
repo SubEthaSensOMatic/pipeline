@@ -6,8 +6,6 @@
 
         private readonly bool[] _nextCalled;
 
-        private bool _endReached;
-
         public PipelineState(int numItems)
         {
             _nextCalled = new bool[numItems];
